@@ -15,4 +15,3 @@ const render = () => {
 
 render()
 store.subscribe(render)
-export default store
