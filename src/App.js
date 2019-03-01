@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { createAnecdote, incVote } from './reducers/anecdoteReducer'
+
 
 const App = (props) => {
 
@@ -9,21 +11,18 @@ const App = (props) => {
   console.log('Appissa props.store.getState() ', props.store.getState())
   const vote = (id) => {
     console.log('vote', id)
-    store.dispatch({ 
-      type: 'VOTE',
-      data: {
-        id: id
-    } })
+    store.dispatch(
+      incVote(id)
+    )
   }
   
   const addAnecdote = event => {
     event.preventDefault()
-    console.log(event.target.value)
-    store.dispatch({ 
-      type: 'NEW',
-      data: {
-        content: newAnecdote
-    } })
+    console.log(event.target.anecdote.value)
+    store.dispatch(
+       createAnecdote(event.target.anecdote.value)
+    )
+    event.target.anecdote.value = ''
     setAnecdote('')
   }  
   
@@ -49,7 +48,7 @@ const App = (props) => {
           <input
             type="text"
             value={newAnecdote}
-            name="Anecdote"
+            name="anecdote"
             onChange={({ target }) =>
               setAnecdote(target.value)
             }
