@@ -1,10 +1,18 @@
 import React from 'react';
+import store from './index'
 
 const App = (props) => {
   const anecdotes = props.store.getState()
-  
+  console.log('Appissa props.store.getState() ', props.store.getState())
   const vote = (id) => {
     console.log('vote', id)
+
+
+    store.dispatch({ 
+      type: 'VOTE',
+      data: {
+        id: id
+    } })
   }
   
   return (
