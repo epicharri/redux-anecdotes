@@ -21,6 +21,7 @@ const asObject = (anecdote) => {
 
 const initialState = anecdotesAtStart.map(asObject)
 
+
 const reducer = (state = initialState, action) => {
 
   switch (action.type) {
@@ -34,10 +35,11 @@ const reducer = (state = initialState, action) => {
         anecdote.id === id ?
           changedAnecdote :
           anecdote
-        )
+        ).sort((x, y) => y.votes - x.votes)
 
       case 'NEW':
         return [...state, asObject(action.data.content)]
+        .sort((x, y) => y.votes - x.votes)
     default:
       return state
   }
