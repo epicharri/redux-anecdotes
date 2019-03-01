@@ -25,7 +25,6 @@ export const createAnecdote = (content) => {
   } 
 } 
 
-
 const getId = () => (100000 * Math.random()).toFixed(0)
 
 const asObject = (anecdote) => {
@@ -36,34 +35,36 @@ const asObject = (anecdote) => {
   }
 }
 
-
-
 const initialState = anecdotesAtStart.map(asObject)
-
-
 
 const reducer = (state = initialState, action) => {
 
   switch (action.type) {
 
     case 'VOTE':
+
       const id = action.data.id
       const anecdoteToChange = state.find(a => a.id === id)
       const votesIncrementedByOne = anecdoteToChange.votes + 1
-      const changedAnecdote = { ...anecdoteToChange, votes: votesIncrementedByOne}
+      const changedAnecdote = { 
+        ...anecdoteToChange, 
+        votes: votesIncrementedByOne
+      }
       return state.map(anecdote =>
         anecdote.id === id ?
           changedAnecdote :
           anecdote
         ).sort((x, y) => y.votes - x.votes)
 
-      case 'NEW':
-        return [...state, asObject(action.data.content)]
-        .sort((x, y) => y.votes - x.votes)
+    case 'NEW':
+      return [
+        ...state, 
+        asObject(action.data.content)
+      ].sort((x, y) => y.votes - x.votes)
+
     default:
       return state
   }
-
 }
 
 export default reducer
