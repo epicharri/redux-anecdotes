@@ -6,6 +6,9 @@ const AnecdoteList = ( props ) => {
   const store = props.store
   console.log('AnecdoteListissä store.getState() on ', store.getState())
   const anecdotes = store.getState().anecdotes
+    .filter(anecdote => anecdote.content.toLocaleLowerCase()
+    .includes(store.getState().filter.toLocaleLowerCase()))
+    .sort((x, y) => y.votes - x.votes)
 
 
 

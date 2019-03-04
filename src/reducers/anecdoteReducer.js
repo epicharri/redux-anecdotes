@@ -39,6 +39,8 @@ const initialState = anecdotesAtStart.map(asObject)
 
 const anecdoteReducer = (state = initialState, action) => {
 
+  console.log('anecdoteReducerissa: ' )
+
   switch (action.type) {
 
     case 'VOTE':
@@ -70,8 +72,10 @@ const anecdoteReducer = (state = initialState, action) => {
         asObject(action.data.content)
       ].sort((x, y) => y.votes - x.votes)
 
+
     default:
       return state
+      
   }
 }
 
