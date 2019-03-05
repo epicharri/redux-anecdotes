@@ -11,12 +11,9 @@
   const filterReducer = (state = '', action) => {
   
     switch (action.type) {
-  
       case 'FILTER':
-  
         const text = action.data.text
         return text
-
       default:
         return state
     }
