@@ -14,11 +14,11 @@ const AnecdoteList = props => {
   //.includes(props.filter.toLocaleLowerCase()))
   //.sort((x, y) => y.votes - x.votes)
 
-  const vote = id => {
-    props.incVote(id)
-    const anecdote = props.anecdotes.find(
+  const vote = anecdote => {
+    props.incVote(anecdote)
+    /*const anecdote = props.anecdotes.find(
       anecdote => anecdote.id === id
-    )
+    )*/
     props.createNotification(
       `You voted for ${
         anecdote.content
@@ -40,7 +40,7 @@ const AnecdoteList = props => {
             has {anecdote.votes}
             <button
               onClick={() => {
-                vote(anecdote.id)
+                vote(anecdote)
               }}
             >
               vote
