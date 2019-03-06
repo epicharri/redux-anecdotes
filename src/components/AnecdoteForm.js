@@ -14,16 +14,11 @@ const AnecdoteForm = ( props ) => {
     event.preventDefault()
     const element = event.target
     const content = element.anecdote.value
-    await anecdoteService.createNew(content)
-    .then(props
-      .createAnecdote(
-        content
-      ))
-    
+    element.anecdote.value = ''
+    props.createAnecdote(content)
     props.createNotification(`You added a new anecdote!`)
     setTimeout(
       () => props.createNotification(''), 5000)
-    element.anecdote.value = ''
     setAnecdote('')
   }
 
