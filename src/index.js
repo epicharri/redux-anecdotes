@@ -15,6 +15,18 @@ const reducer = combineReducers({
 
 const store = createStore(reducer)
 
+/*
+anecdoteService.getAll().then(anecdotes =>
+  anecdotes.forEach(anecdote => {
+    store.dispatch({ 
+      type: 'NEW',
+      data: {
+        content: anecdote.content
+      }
+    })
+  }))
+*/
+
 const render = () => {
   ReactDOM.render(
     <Provider store={store}>

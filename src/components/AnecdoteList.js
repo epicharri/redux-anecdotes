@@ -1,23 +1,34 @@
 import React from "react"
-import { connect } from 'react-redux'
+import { connect } from "react-redux"
 import { incVote } from "../reducers/anecdoteReducer"
-import { createNotification } from '../reducers/notificationReducer'
+import { createNotification } from "../reducers/notificationReducer"
 
-const AnecdoteList = ( props ) => {
+const AnecdoteList = props => {
   //const store = props.store
-  console.log('anecdotelistissä props on ', props)
- // const anecdotes = props.anecdotes
-   // .filter(anecdote => anecdote.content.toLocaleLowerCase()
-    //.includes(props.filter.toLocaleLowerCase()))
-    //.sort((x, y) => y.votes - x.votes)
+  console.log(
+    "anecdotelistissä props on ",
+    props
+  )
+  // const anecdotes = props.anecdotes
+  // .filter(anecdote => anecdote.content.toLocaleLowerCase()
+  //.includes(props.filter.toLocaleLowerCase()))
+  //.sort((x, y) => y.votes - x.votes)
 
-  const vote = (id) => {
-
+  const vote = id => {
     props.incVote(id)
-    const anecdote = props.anecdotes.find(anecdote => anecdote.id === id)
-    props.createNotification(`You voted for ${anecdote.content}`)
+    const anecdote = props.anecdotes.find(
+      anecdote => anecdote.id === id
+    )
+    props.createNotification(
+      `You voted for ${
+        anecdote.content
+      }`
+    )
     setTimeout(
-      () => props.createNotification(''), 5000)
+      () =>
+        props.createNotification(""),
+      5000
+    )
   }
 
   return (
@@ -29,9 +40,8 @@ const AnecdoteList = ( props ) => {
             has {anecdote.votes}
             <button
               onClick={() => {
-                  vote(anecdote.id)
-                }
-              }
+                vote(anecdote.id)
+              }}
             >
               vote
             </button>
@@ -42,14 +52,22 @@ const AnecdoteList = ( props ) => {
   )
 }
 
-const anecdotesToShow = ( props ) => props.anecdotes
-    .filter(anecdote => anecdote.content.toLocaleLowerCase()
-    .includes(props.filter.toLocaleLowerCase()))
+const anecdotesToShow = props => {
+  console.log('anecdotesToShowssa props on ', props)
+  return props.anecdotes
+    .filter(anecdote =>
+      anecdote.content
+        .toLocaleLowerCase()
+        .includes(
+          props.filter.toLocaleLowerCase()
+        )
+    )
     .sort((x, y) => y.votes - x.votes)
+}
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    anecdotes: anecdotesToShow(state),
+    anecdotes: anecdotesToShow(state)
     //notification: state.notification,
     //filter: state.filter
   }
@@ -62,5 +80,6 @@ const mapDispatchToProps = {
 
 const ConnectedAnecdoteList = connect(
   mapStateToProps,
-  mapDispatchToProps)(AnecdoteList)
+  mapDispatchToProps
+)(AnecdoteList)
 export default ConnectedAnecdoteList
