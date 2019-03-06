@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { connect } from 'react-redux'
 import { createAnecdote } from '../reducers/anecdoteReducer'
 import { createNotification } from '../reducers/notificationReducer'
- 
+import anecdoteService from '../services/anecdotes'
 
 const AnecdoteForm = ( props ) => {
   
@@ -10,17 +10,20 @@ const AnecdoteForm = ( props ) => {
 
   const [newAnecdote, setAnecdote] = useState('')
 
-  const addAnecdote = event => {
+  const addAnecdote = async (event) => {
     event.preventDefault()
-    props
+    const element = event.target
+    const content = element.anecdote.value
+    await anecdoteService.createNew(content)
+    .then(props
       .createAnecdote(
-        event.target.anecdote.value
-      )
+        content
+      ))
     
-    props.createNotification(`You added a new anecdote: ${event.target.anecdote.value}`)
+    props.createNotification(`You added a new anecdote!`)
     setTimeout(
       () => props.createNotification(''), 5000)
-    event.target.anecdote.value = ''
+    element.anecdote.value = ''
     setAnecdote('')
   }
 

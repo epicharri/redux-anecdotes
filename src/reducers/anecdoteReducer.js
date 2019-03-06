@@ -16,12 +16,10 @@ export const incVote = id => {
   }
 }
 
-export const createAnecdote = content => {
+export const createAnecdote = data => {
   return {
     type: "NEW",
-    data: {
-      content: content
-    }
+    data,
   }
 }
 
@@ -95,7 +93,7 @@ const anecdoteReducer = (
     case "NEW":
       return [
         ...state,
-        asObject(action.data.content)
+        asObject(action.data)
       ].sort(
         (x, y) => y.votes - x.votes
       )
